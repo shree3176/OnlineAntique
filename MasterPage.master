@@ -1,0 +1,121 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+    <link href="default.css" rel="stylesheet" type="text/css" />
+    <link href="menu/menu/style.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" type="text/javascript">
+//--------------- LOCALIZEABLE GLOBALS ---------------
+var d=new Date();
+var monthname=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+//Ensure correct for language. English is "January 1, 2004"
+var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+//---------------   END LOCALIZEABLE   ---------------
+</script>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="background-image:url(image/bg7.jpg); background-repeat:repeat; background-attachment:fixed;">
+    <form id="form1" runat="server">
+    <table width="980px" align="center" border="0" style="background-color:white">
+        <tr><td style="background-color:Silver">
+        <script language="JavaScript" type="text/javascript">
+				var dayarray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+				var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+ 
+				function getthedate(){
+					var mydate=new Date()
+					var year=mydate.getYear()
+					if (year < 1000)
+						year+=1900
+					var day=mydate.getDay()
+					var month=mydate.getMonth()
+					var daym=mydate.getDate()
+					if (daym<10)
+						daym="0"+daym
+					var hours=mydate.getHours()
+					var minutes=mydate.getMinutes()
+					var seconds=mydate.getSeconds()
+					var dn="AM"
+					if (hours>=12)
+						dn="PM"
+						if (hours>12){
+							hours=hours-12
+							}
+						if (hours==0)
+							hours=12
+						if (minutes<=9)
+							minutes="0"+minutes
+						if (seconds<=9)
+							seconds="0"+seconds
+				//Display Current Day, Date & Time
+					var cdate=dayarray[day]+", "+montharray[month]+" "+daym+", "+year+" "+hours+":"+minutes+":"+seconds+" "+dn
+					if (document.all)
+						document.all.clock.innerHTML=cdate
+					else if (document.getElementById)
+						document.getElementById("clock").innerHTML=cdate
+					else
+					document.write(cdate)
+				}
+				if (!document.all&&!document.getElementById)
+					getthedate()
+				function goforit(){
+					if (document.all||document.getElementById)
+						setInterval("getthedate()",1000)
+					}
+				goforit()
+
+				</script>
+        <asp:Panel ID="Panel1" runat="server">
+        <img src="image/homepage/logo - Copy.jpg" alt="logo" style="width: 450px; height: 163px; top: 18px; left: 189px;"/>
+         Follow us :<img src="image/homepage/facebook.png" /><img src="image/homepage/twitter.png" />
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="clock"></span>
+         </asp:Panel>
+            
+        <hr/>
+        <%--<------------Menu--------------->--%>
+    <div align="center">
+    <ul id="css3menu1" class="topmenu">
+	<li class="topfirst"><a href="home.aspx"style="height:32px;line-height:32px;" accesskey="H" ><img src="menu/menu/b-home-323.png" alt="homepage" title="homepage"/>Home</a></li>
+	<li class="topmenu"><a href="#" style="height:32px;line-height:32px;"><span><img src="menu/menu/blue-menu-32.png" alt="product" title="product"/>Product</span></a>
+	<ul>
+		<li><a href="gallery.aspx" accesskey="G">SlideShow</a></li>
+		<li><a href="#"><span>Category</span></a>
+		<ul>
+			<li><a href="dolls_category.aspx" accesskey="D">Dolls</a></li>
+			<li><a href="books_category.aspx" accesskey="B">Books</a></li>
+			<li><a href="clock_category.aspx" accesskey="C">Clocks</a></li>
+			<li><a href="folks_art_category.aspx" accesskey="F">Folks Arts</a></li>
+			<li><a href="artisan_jwellery_category.aspx" accesskey="A">Artisan Jwellery</a></li>
+		</ul></li>
+	</ul></li>
+	<li class="topmenu"><a href="register.aspx"style="height:32px;line-height:32px;" 
+            accesskey="R"><img src="menu/menu/register.jpg" alt="Register" title="register"/>Register</a></li>
+	<li class="topmenu"><a href="help.aspx" style="height:32px;line-height:32px;" accesskey="E"><img src="menu/menu/blue-support-32.png" alt="help" title="help"/>Help</a></li>
+	<li class="topmenu"><a href="sitemap.aspx"style="height:32px;line-height:32px;" 
+            accesskey="S"><img src="menu/menu/sitemap.jpg" alt="sitemap" title="sitemap"/>Sitemap</a></li>
+	<li class="toplast"><a href="visit_us.aspx"style="height:32px;line-height:32px;" 
+            accesskey="V"><img src="menu/menu/blue_circle - phone1.png" alt="visit us" title="visit us"/>Visit US</a></li>
+</ul>
+</div>
+    
+    <%--<----------Menu End------------->--%>
+        <hr/>
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    <hr/>
+        <hr/>
+    <div align="center"><a href="home.aspx">Home</a> | <a href="visit_us.aspx">Visit Us</a>  |<a href="sitemap.aspx">Sitemap</a>
+    </br>
+    <hr/>
+    </td></tr>
+        </table>
+    </form>
+</body>
+</html>
